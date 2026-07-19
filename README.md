@@ -8,7 +8,7 @@ review and prioritisation but do not make autonomous educational decisions.
 ## Stable release
 
 - Release: `1.3.9.14-V9.4.2-stable`
-- Moodle build: `2026071806`
+- Moodle build: `2026071807`
 - Minimum Moodle: 4.1 (`2022112800`)
 - License: GNU GPL v3 or later
 - Optional integration: VTutor through a configurable URL template

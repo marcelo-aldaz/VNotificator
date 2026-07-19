@@ -2,6 +2,8 @@
 
 ## 1.3.9.14 — V9.4.2 stable (2026-07-18)
 
+- Aligned Moodle maturity metadata with `MATURITY_STABLE` and incremented the
+  metadata-only build to `2026071807` before the public release.
 - Promoted the production-accepted RC5 logic without analytical or schema
   changes.
 - Recorded successful Moodle web-interface validation of follow-up, novelty

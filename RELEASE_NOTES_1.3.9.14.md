@@ -2,7 +2,7 @@
 
 Release date: 2026-07-18  
 Moodle component: `local_pceinotifications`  
-Moodle build: `2026071806`  
+Moodle build: `2026071807`  
 License: GPL-3.0-or-later
 
 ## Highlights
@@ -37,7 +37,7 @@ a Moodle plugin because the repository root does not add the required
 SHA-256:
 
 ```text
-2b8f7a706eab050284f7b02ffea431e50289793024e71fa86e85d2f95cd0460e
+f718b3cea36c36b83184278d026740a5a62ec108c7fb00f6a473f9d24b08667f
 ```
 
 ## Remaining reproducibility work

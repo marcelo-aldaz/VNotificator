@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/pceinotifications/db" VERSION="2026071806" COMMENT="PCEI - Notificaciones ATPA/TEI">
+<XMLDB PATH="local/pceinotifications/db" VERSION="2026071807" COMMENT="PCEI - Notificaciones ATPA/TEI">
   <TABLES>
     <TABLE NAME="local_pceinotif_blocks" COMMENT="Bloques ATPA/TEI sincronizados desde secciones">
       <FIELDS>

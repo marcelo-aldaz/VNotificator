@@ -17,7 +17,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_pceinotifications';
-$plugin->version   = 2026071806;
+$plugin->version   = 2026071807;
 $plugin->requires  = 2022112800; // Moodle 4.1.
 $plugin->release   = '1.3.9.14-V9.4.2-stable';
-$plugin->maturity  = MATURITY_RC;
+$plugin->maturity  = MATURITY_STABLE;

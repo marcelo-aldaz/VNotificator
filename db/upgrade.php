@@ -374,6 +374,11 @@ function xmldb_local_pceinotifications_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026071806, 'local', 'pceinotifications');
     }
 
+    if ($oldversion < 2026071807) {
+        // Align Moodle maturity metadata with the stable release; no schema change.
+        upgrade_plugin_savepoint(true, 2026071807, 'local', 'pceinotifications');
+    }
+
 
     return true;
 }
