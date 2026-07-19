@@ -4,6 +4,8 @@
   "name": "VNotificator",
   "version": "1.3.9.14",
   "datePublished": "2026-07-18",
+  "identifier": "https://doi.org/10.5281/zenodo.21436708",
+  "sameAs": "https://doi.org/10.5281/zenodo.21436707",
   "description": "Moodle local plugin for academic analytics, configurable notifications, and human-reviewed pedagogical follow-up in flexible education contexts.",
   "applicationCategory": "Educational software",
   "programmingLanguage": "PHP",

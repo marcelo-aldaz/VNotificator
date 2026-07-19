@@ -1,5 +1,7 @@
 # VNotificator
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21436708.svg)](https://doi.org/10.5281/zenodo.21436708)
+
 VNotificator (`local_pceinotifications`) is a Moodle local plugin for academic
 analytics, configurable risk indicators, notifications, and human-reviewed
 pedagogical follow-up. Risk colours are temporary rule outputs: they support
@@ -11,6 +13,8 @@ review and prioritisation but do not make autonomous educational decisions.
 - Moodle build: `2026071807`
 - Minimum Moodle: 4.1 (`2022112800`)
 - License: GNU GPL v3 or later
+- Version DOI: <https://doi.org/10.5281/zenodo.21436708>
+- Concept DOI: <https://doi.org/10.5281/zenodo.21436707>
 - Optional integration: VTutor through a configurable URL template
 
 Repository: <https://github.com/marcelo-aldaz/VNotificator>
@@ -73,5 +77,7 @@ reproducible non-sensitive defects. Never include student data in an issue.
 
 ## Citation
 
-Citation metadata is provided in `CITATION.cff`. Add the software DOI after the
-public release is archived.
+Citation metadata is provided in `CITATION.cff`. Cite this release using
+<https://doi.org/10.5281/zenodo.21436708>. Use the concept DOI
+<https://doi.org/10.5281/zenodo.21436707> when referring to the software project
+across all versions.
