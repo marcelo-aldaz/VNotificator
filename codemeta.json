@@ -1,0 +1,29 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "VNotificator",
+  "version": "1.3.9.14",
+  "datePublished": "2026-07-18",
+  "description": "Moodle local plugin for academic analytics, configurable notifications, and human-reviewed pedagogical follow-up in flexible education contexts.",
+  "applicationCategory": "Educational software",
+  "programmingLanguage": "PHP",
+  "runtimePlatform": "Moodle",
+  "license": "https://spdx.org/licenses/GPL-3.0-or-later.html",
+  "codeRepository": "https://github.com/marcelo-aldaz/VNotificator",
+  "issueTracker": "https://github.com/marcelo-aldaz/VNotificator/issues",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Nelson Marcelo",
+      "familyName": "Aldaz Herrera"
+    }
+  ],
+  "keywords": [
+    "Moodle",
+    "learning analytics",
+    "academic notifications",
+    "early warning",
+    "human-in-the-loop",
+    "educational software"
+  ]
+}

@@ -1,0 +1,8 @@
+scenario,activitycount,inactivitydays,openalerts,pendingnotifications,expected_risklevel
+active_no_alerts,1,0,0,0,green
+one_open_alert,1,0,1,0,yellow
+two_open_alerts,1,0,2,0,orange
+three_open_alerts,1,0,3,0,red
+inactive_eight_days,1,8,0,0,yellow
+inactive_fifteen_days,1,15,0,0,orange
+inactive_twenty_two_days,1,22,0,0,red

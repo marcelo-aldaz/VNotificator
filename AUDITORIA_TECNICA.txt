@@ -1,0 +1,19 @@
+VNotificator - Auditoría técnica de consolidación limpia
+
+Resumen de revisión aplicada en esta build:
+- Verificación de sintaxis PHP del plugin.
+- Revisión de empaquetado Moodle con carpeta raíz local_pceinotifications/.
+- Revisión de claves de idioma definidas para llamadas literales get_string() del componente.
+- Revisión de archivos residuales o copias de seguridad innecesarias.
+- Corrección de carga explícita de locallib.php en servicios/tareas que usan local_pceinotifications\util fuera de páginas que ya lo cargan.
+
+Ajustes aplicados en esta consolidación:
+1. classes/local/analytics/report_service.php
+   - Carga explícita de locallib.php para evitar errores latentes al usar util::sanitize_inactivity_days().
+2. classes/task/send_profile_summaries.php
+   - Carga explícita de locallib.php para evitar fallos del task al invocar util::log_debug().
+3. version.php
+   - Incremento de versión de consolidación limpia.
+
+Nota:
+Esta build está orientada a estabilización y reducción de regresiones. La validación funcional final sigue dependiendo de pruebas en el entorno Moodle real.

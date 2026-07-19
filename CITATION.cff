@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use VNotificator, please cite the software and its associated software paper."
+title: "VNotificator"
+type: software
+authors:
+  - family-names: "Aldaz Herrera"
+    given-names: "Nelson Marcelo"
+version: "1.3.9.14"
+date-released: "2026-07-18"
+license: GPL-3.0-or-later
+repository-code: "https://github.com/marcelo-aldaz/VNotificator"
+url: "https://github.com/marcelo-aldaz/VNotificator"
+abstract: >-
+  A Moodle plugin for academic analytics, configurable notifications, and
+  human-reviewed pedagogical follow-up in flexible education contexts.
+keywords:
+  - Moodle
+  - learning analytics
+  - academic notifications
+  - early warning
+  - human-in-the-loop

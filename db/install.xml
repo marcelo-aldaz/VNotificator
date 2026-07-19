@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/pceinotifications/db" VERSION="2026071806" COMMENT="PCEI - Notificaciones ATPA/TEI">
+  <TABLES>
+    <TABLE NAME="local_pceinotif_blocks" COMMENT="Bloques ATPA/TEI sincronizados desde secciones">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="sectionid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="sectionname" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="blocktype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="other"/>
+        <FIELD NAME="sequenceindex" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="enddate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="bbbcmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="blockstate" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="detected"/>
+        <FIELD NAME="syncsource" TYPE="char" LENGTH="30" NOTNULL="false"/>
+        <FIELD NAME="syncnote" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="lastsync" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="calendarstatus" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="pending"/>
+        <FIELD NAME="calendarnote" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="calendarupdated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_course_section" UNIQUE="true" FIELDS="courseid,sectionid"/>
+        <INDEX NAME="idx_course_type_date" UNIQUE="false" FIELDS="courseid,blocktype,startdate"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_pceinotif_log" COMMENT="Bitácora de notificaciones enviadas">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="blockid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="notiftype" TYPE="char" LENGTH="30" NOTNULL="true"/>
+        <FIELD NAME="subject" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="messagehash" TYPE="char" LENGTH="40" NOTNULL="false"/>
+        <FIELD NAME="success" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="errormsg" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="timesent" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_unique_send" UNIQUE="true" FIELDS="courseid,blockid,userid,notiftype"/>
+        <INDEX NAME="idx_course_user" UNIQUE="false" FIELDS="courseid,userid"/>
+      </INDEXES>
+    </TABLE>
+  
+    <TABLE NAME="local_pceinotif_events" COMMENT="Calendar synchronization for VNotificator blocks">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="blockid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="eventid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="eventtype" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="course"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="created"/>
+        <FIELD NAME="errormsg" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="uq_blockid" UNIQUE="true" FIELDS="blockid"/>
+        <INDEX NAME="idx_courseid" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="idx_eventid" UNIQUE="false" FIELDS="eventid"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_pceinotif_risk" COMMENT="Riesgo individual analitico para dashboard 8C">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="cohortid" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="tutorid" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="periodtype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="periodkey" TYPE="char" LENGTH="30" NOTNULL="true"/>
+        <FIELD NAME="lastactivity" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="inactivitydays" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="activitycount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="openalerts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="closedalerts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="pendingnotifications" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="attendednotifications" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="interventionscount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="lastintervention" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="followupstatus" TYPE="char" LENGTH="30" NOTNULL="false"/>
+        <FIELD NAME="risklevel" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="green"/>
+        <FIELD NAME="semaphore" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="green"/>
+        <FIELD NAME="trend" TYPE="char" LENGTH="20" NOTNULL="false"/>
+        <FIELD NAME="timecalculated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="sourceversion" TYPE="char" LENGTH="30" NOTNULL="false"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_user" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="idx_course" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="idx_period" UNIQUE="false" FIELDS="periodtype,periodkey"/>
+        <INDEX NAME="idx_risklevel" UNIQUE="false" FIELDS="risklevel"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_pceinotif_dashagg" COMMENT="Agregados institucionales analiticos para dashboard 8C">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="scopelevel" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="scopeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="periodtype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="periodkey" TYPE="char" LENGTH="30" NOTNULL="true"/>
+        <FIELD NAME="totalstudents" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="activestudents" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="studentsatrisk" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="highriskstudents" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recoveredstudents" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="openalerts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="closedalerts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="green_count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="yellow_count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="orange_count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="red_count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recovered_count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="coveragepercent" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="interventioneffectiveness" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="institutionalsemaphore" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="green"/>
+        <FIELD NAME="trenddirection" TYPE="char" LENGTH="20" NOTNULL="false"/>
+        <FIELD NAME="timecalculated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="sourceversion" TYPE="char" LENGTH="30" NOTNULL="false"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="idx_scopeperiod" UNIQUE="false" FIELDS="scopelevel,scopeid,periodtype,periodkey"/></INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_pceinotif_thresholds" COMMENT="Umbrales configurables para motor analitico 8C">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="isactive" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="periodtype" TYPE="char" LENGTH="20" NOTNULL="false"/>
+        <FIELD NAME="yellow_inactivity_min" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="8"/>
+        <FIELD NAME="orange_inactivity_min" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="15"/>
+        <FIELD NAME="red_inactivity_min" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="22"/>
+        <FIELD NAME="yellow_alerts_min" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="orange_alerts_min" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="2"/>
+        <FIELD NAME="red_alerts_min" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="3"/>
+        <FIELD NAME="green_risk_max_percent" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="9.99"/>
+        <FIELD NAME="yellow_risk_max_percent" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="20.00"/>
+        <FIELD NAME="orange_risk_max_percent" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="35.00"/>
+        <FIELD NAME="red_risk_min_percent" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="35.01"/>
+        <FIELD NAME="recovered_requires_activity_days" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="7"/>
+        <FIELD NAME="recovered_max_openalerts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="false"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+    </TABLE>
+
+    <TABLE NAME="local_pceinotif_runs" COMMENT="Historial de ejecucion del motor analitico 8C">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="periodtype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="periodkey" TYPE="char" LENGTH="30" NOTNULL="true"/>
+        <FIELD NAME="scopelevel" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="institution"/>
+        <FIELD NAME="scopeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recordsprocessed" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="success"/>
+        <FIELD NAME="errormessage" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="startedat" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="finishedat" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="executedby" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="engineversion" TYPE="char" LENGTH="30" NOTNULL="false"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+    </TABLE>
+
+    <TABLE NAME="local_pceinotif_followup" COMMENT="Trazabilidad de seguimiento pedagógico por estudiante">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="teacherid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending"/>
+        <FIELD NAME="contacttype" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="review_only"/>
+        <FIELD NAME="note" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="nextreview" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="commitment" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="responsible" TYPE="char" LENGTH="255" NOTNULL="false"/>
+        <FIELD NAME="commitmentdate" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="commitmentstatus" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="notstarted"/>
+        <FIELD NAME="evidence" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_course_user" UNIQUE="false" FIELDS="courseid,userid"/>
+        <INDEX NAME="idx_teacher" UNIQUE="false" FIELDS="teacherid"/>
+        <INDEX NAME="idx_status" UNIQUE="false" FIELDS="status"/>
+      </INDEXES>
+    </TABLE>
+
+
+    <TABLE NAME="local_pceinotif_novelty" COMMENT="Bitácora de novedades de seguimiento vinculadas a alertas">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="teacherid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="detail" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="open"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="internal"/>
+        <FIELD NAME="source" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="teacher_alert"/>
+        <FIELD NAME="risklevel" TYPE="char" LENGTH="20" NOTNULL="false"/>
+        <FIELD NAME="priority" TYPE="char" LENGTH="20" NOTNULL="false"/>
+        <FIELD NAME="studentresponse" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="teachervalidation" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="closedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timeclosed" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_course_user" UNIQUE="false" FIELDS="courseid,userid"/>
+        <INDEX NAME="idx_status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="idx_teacher" UNIQUE="false" FIELDS="teacherid"/>
+      </INDEXES>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
